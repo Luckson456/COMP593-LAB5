@@ -30,13 +30,13 @@ def post_new_paste(title, body_text, expiration='N', listed=True):
             
                 }
     print('creating a new paste',end='')
-    resp=requests.post(PASTEBIN_API_POST_URL,params=params)
+    response=requests.post(PASTEBIN_API_POST_URL,params=params)
     
-    if resp.status_code == requests.Code.ok:
+    if response.status_code == requests.Code.ok:
         print('success')
-        return resp.text
+        return response.text
     else:
         print('failure')
-        print(f"{resp.status_code}{resp.reason}({resp.text})")        
+        print(f"{response.status_code}{response.reason}({response.text})")        
     # Note: This function will be written as a group 
     return

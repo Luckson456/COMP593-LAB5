@@ -15,6 +15,8 @@ import pastebin_api
 
 def main():
     poke_name = get_pokemon_name()
+    if poke_name is None:
+        return
     poke_info = poke_api.get_pokemon_info(poke_name)
     if poke_info is not None:
         paste_title, paste_body = get_paste_data(poke_info)
@@ -29,7 +31,11 @@ def get_pokemon_name():
         str: Pokemon name
     """
     # TODO: Function body
-    return
+    if len (sys.argv)<2:
+        print("error:no pokemon name provided as a cmd line argument")
+        sys.exit(1)
+        
+    return sys.argv[1]
 
 def get_paste_data(pokemon_info):
     """Builds the title and body text for a PasteBin paste that lists a Pokemon's abilities.
@@ -41,8 +47,12 @@ def get_paste_data(pokemon_info):
         (str, str): Title and body text for the PasteBin paste
     """    
     # TODO: Build the paste title
+    paste_title=f"{pokemon_info['name'].capitalize()}'s abilities"
     # TODO: Build the paste body text
-    return # (title, body_text)
+    abilities=[ability['ability']['name'].capitalize() for ability in pokemon_info['abilities']]
+    paste_body="\n".join(abilities)
+    
+    return (paste_title,paste_body)
 
 if __name__ == '__main__':
     main()
