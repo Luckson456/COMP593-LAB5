@@ -1,13 +1,13 @@
 """ 
 Description: 
-  Creates a new PasteBin paste that contains a list of abilities 
-  for a specified Pokemon
+Creates a new PasteBin paste that contains a list of abilities 
+for a specified Pokemon
 
 Usage:
-  python pokemon_paste.py poke_name
+python pokemon_paste.py poke_name
 
 Parameters:
-  poke_name = Pokemon name
+poke_name = Pokemon name
 """
 import sys
 import poke_api
