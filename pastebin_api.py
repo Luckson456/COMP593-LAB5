@@ -20,7 +20,8 @@ def post_new_paste(title, body_text, expiration='N', listed=True):
         str: URL of new paste, if successful. Otherwise None.
     """    
     # TODO: Function body
-    params={ 
+    print("Posting new paste to Pastebin...",end='')
+    post_params={ 
         "api_dev_key":API_DEV_KEY,
             "api_option":"paste",
             "api_paste_code":body_text,
@@ -29,14 +30,12 @@ def post_new_paste(title, body_text, expiration='N', listed=True):
             "api_paste_private":"0" if listed else "1"
             
                 }
-    print('creating a new paste',end='')
-    response=requests.post(PASTEBIN_API_POST_URL,params=params)
+    resp_msg=requests.post(PASTEBIN_API_POST_URL,data=post_params)
     
-    if response.status_code == requests.Code.ok:
+    if resp_msg.status_code == requests.codes.ok:
         print('success')
-        return response.text
     else:
         print('failure')
-        print(f"{response.status_code}{response.reason}({response.text})")        
+        print(f'Response code:{resp_msg.status.code}',({resp_msg.reason}) )       
     # Note: This function will be written as a group 
-    return
+    return resp_msg.text
